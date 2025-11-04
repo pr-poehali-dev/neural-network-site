@@ -48,7 +48,7 @@ const Index = () => {
       const aiMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: 'Привет! Я нейросеть-демо. В реальной версии здесь будет подключен настоящий ИИ через API.',
+        content: 'Привет! Я сергиндоус SGPT 1 — нейросеть-демо. В реальной версии здесь будет подключен настоящий ИИ через API.','
         timestamp: new Date(),
       };
       setMessages((prev) => [...prev, aiMessage]);
@@ -70,7 +70,9 @@ const Index = () => {
           <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
             <Icon name="Sparkles" size={18} className="text-white" />
           </div>
-          <h1 className="text-xl font-semibold">Нейросеть</h1>
+          <div>
+            <h1 className="text-xl font-semibold">сергиндоус SGPT 1</h1>
+          </div>
         </div>
       </header>
 
@@ -83,7 +85,7 @@ const Index = () => {
               </div>
               <h2 className="text-2xl font-semibold mb-2">Начните диалог</h2>
               <p className="text-muted-foreground">
-                Задайте любой вопрос — нейросеть ответит
+                Задайте любой вопрос — сергиндоус SGPT 1 ответит
               </p>
             </div>
           ) : (
