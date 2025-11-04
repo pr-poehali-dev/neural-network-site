@@ -48,7 +48,7 @@ const Index = () => {
       const aiMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: 'Привет! Я сергиндоус SGPT 1 — нейросеть-демо. В реальной версии здесь будет подключен настоящий ИИ через API.','
+        content: 'Привет! Я сергиндоус SGPT 1 — нейросеть-демо. В реальной версии здесь будет подключен настоящий ИИ через API.',
         timestamp: new Date(),
       };
       setMessages((prev) => [...prev, aiMessage]);
