@@ -214,6 +214,13 @@ const Index = () => {
       <footer className="border-t border-border px-6 py-4">
         <form onSubmit={handleSubmit} className="max-w-3xl mx-auto">
           <div className="flex gap-3 items-end">
+            <Button
+              type="submit"
+              disabled={!input.trim() || isLoading}
+              className="h-[52px] px-6 bg-primary hover:bg-primary/90"
+            >
+              <Icon name="Send" size={18} />
+            </Button>
             <Textarea
               ref={textareaRef}
               value={input}
@@ -223,13 +230,6 @@ const Index = () => {
               className="min-h-[52px] max-h-[200px] resize-none bg-card border-border focus-visible:ring-primary"
               rows={1}
             />
-            <Button
-              type="submit"
-              disabled={!input.trim() || isLoading}
-              className="h-[52px] px-6 bg-primary hover:bg-primary/90"
-            >
-              <Icon name="Send" size={18} />
-            </Button>
           </div>
           <p className="text-xs text-muted-foreground mt-2 text-center">
             Нажмите Enter для отправки, Shift+Enter для новой строки
