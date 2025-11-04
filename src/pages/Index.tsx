@@ -239,12 +239,8 @@ const Index = () => {
     setInput('');
     setIsLoading(true);
 
-    let response = getAIResponse(userQuestion);
-    
-    if (!response) {
-      const onlineAnswer = await searchOnline(userQuestion);
-      response = onlineAnswer || 'Извините, я не нашёл информацию по вашему вопросу. Попробуйте переформулировать запрос.';
-    }
+    const onlineAnswer = await searchOnline(userQuestion);
+    const response = onlineAnswer || 'Извините, я не нашёл информацию по вашему вопросу. Попробуйте переформулировать запрос.';
 
     const aiMessage: Message = {
       id: (Date.now() + 1).toString(),
