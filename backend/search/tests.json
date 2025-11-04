@@ -1,0 +1,22 @@
+{
+  "tests": [
+    {
+      "name": "Поиск информации о космосе",
+      "method": "POST",
+      "body": {
+        "query": "Сколько планет в солнечной системе?"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "answer": "string",
+        "query": "string"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "OPTIONS запрос для CORS",
+      "method": "OPTIONS",
+      "expectedStatus": 200
+    }
+  ]
+}

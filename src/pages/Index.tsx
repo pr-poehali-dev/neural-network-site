@@ -29,6 +29,27 @@ const Index = () => {
     textareaRef.current?.focus();
   }, []);
 
+  const searchOnline = async (query: string): Promise<string> => {
+    try {
+      const response = await fetch('https://functions.poehali.dev/d2db74d3-6334-43fb-a7e9-4fe5ab0c274b', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ query }),
+      });
+
+      if (!response.ok) {
+        return '';
+      }
+
+      const data = await response.json();
+      return data.answer || '';
+    } catch (error) {
+      return '';
+    }
+  };
+
   const getAIResponse = (userInput: string): string => {
     const input = userInput.toLowerCase();
     
@@ -199,7 +220,7 @@ const Index = () => {
       return 'Математика — царица наук. Число Пи (π) ≈ 3.14159... бесконечно и не повторяется. Теорема Пифагора: a² + b² = c² работает только для прямоугольных треугольников. Великие математики: Евклид, Эйлер, Гаусс, Ковалевская.';
     }
 
-    return 'Привет! Я сергиндоус SPT 1. Спроси меня о музыке, космосе, истории, технологиях, спорте или науке — я знаю много интересного! 🚀';
+    return '';
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -218,16 +239,21 @@ const Index = () => {
     setInput('');
     setIsLoading(true);
 
-    setTimeout(() => {
-      const aiMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        role: 'assistant',
-        content: getAIResponse(userQuestion),
-        timestamp: new Date(),
-      };
-      setMessages((prev) => [...prev, aiMessage]);
-      setIsLoading(false);
-    }, 1000);
+    let response = getAIResponse(userQuestion);
+    
+    if (!response) {
+      const onlineAnswer = await searchOnline(userQuestion);
+      response = onlineAnswer || 'Извините, я не нашёл информацию по вашему вопросу. Попробуйте переформулировать запрос.';
+    }
+
+    const aiMessage: Message = {
+      id: (Date.now() + 1).toString(),
+      role: 'assistant',
+      content: response,
+      timestamp: new Date(),
+    };
+    setMessages((prev) => [...prev, aiMessage]);
+    setIsLoading(false);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
